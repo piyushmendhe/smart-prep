@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useProgress } from '@/hooks/useProgress';
 import { PageContainer, GlassCard } from '@/components/ui/components';
-import { Save, Download, Upload, Link2, RefreshCw, Cpu } from 'lucide-react';
+import { Save, Download, Upload, Link2, RefreshCw, Cpu, BookOpen, BarChart3, Database, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getTokenUsage } from '@/lib/claude';
 
@@ -212,20 +212,78 @@ export default function Profile() {
                   className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent"
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Focus Tracks
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { id: 'dsa', label: 'DSA', icon: BookOpen },
+                    { id: 'system-design', label: 'System Design', icon: BarChart3 },
+                    { id: 'de-roadmap', label: 'Data Engineering', icon: Database },
+                    { id: 'behavioral', label: 'Behavioral', icon: MessageSquare },
+                  ].map(({ id, label, icon: Icon }) => {
+                    const selected = (formData.selectedTracks ?? ['dsa','system-design','de-roadmap','behavioral']).includes(id);
+                    return (
+                      <button
+                        key={id}
+                        type="button"
+                        onClick={() => {
+                          const current = formData.selectedTracks ?? ['dsa','system-design','de-roadmap','behavioral'];
+                          setFormData({
+                            ...formData,
+                            selectedTracks: selected
+                              ? current.filter(t => t !== id)
+                              : [...current, id],
+                          });
+                        }}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm border transition-all ${
+                          selected
+                            ? 'bg-accent/20 text-accent border-accent/50 font-medium'
+                            : 'bg-neutral-800 text-muted border-neutral-700 hover:border-neutral-500'
+                        }`}
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="text-xs text-muted mb-1">Start Date</p>
-                <p className="font-medium text-foreground">
-                  {new Date(data.settings.startDate).toLocaleDateString()}
-                </p>
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-xs text-muted mb-1">Start Date</p>
+                  <p className="font-medium text-foreground">
+                    {new Date(data.settings.startDate).toLocaleDateString()}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted mb-1">Daily Goal</p>
+                  <p className="font-medium text-accent">
+                    {data.settings.dailyGoal} problems/day
+                  </p>
+                </div>
               </div>
               <div>
-                <p className="text-xs text-muted mb-1">Daily Goal</p>
-                <p className="font-medium text-accent">
-                  {data.settings.dailyGoal} problems/day
-                </p>
+                <p className="text-xs text-muted mb-2">Focus Tracks</p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { id: 'dsa', label: 'DSA', icon: BookOpen },
+                    { id: 'system-design', label: 'System Design', icon: BarChart3 },
+                    { id: 'de-roadmap', label: 'Data Engineering', icon: Database },
+                    { id: 'behavioral', label: 'Behavioral', icon: MessageSquare },
+                  ].map(({ id, label, icon: Icon }) => {
+                    const active = (data.settings.selectedTracks ?? ['dsa','system-design','de-roadmap','behavioral']).includes(id);
+                    return active ? (
+                      <span key={id} className="flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm bg-accent/15 text-accent border border-accent/30">
+                        <Icon className="w-3.5 h-3.5" />{label}
+                      </span>
+                    ) : null;
+                  })}
+                </div>
               </div>
             </div>
           )}

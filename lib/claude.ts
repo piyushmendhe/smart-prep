@@ -1,11 +1,4 @@
-// Claude API utility
-
-const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
-const MODEL = 'claude-sonnet-4-20250514';
-
-function getApiKey(): string {
-  return process.env.NEXT_PUBLIC_CLAUDE_API_KEY || '';
-}
+// Claude API utility — proxies through /api/claude (key stays server-side)
 
 function hashPrompt(prompt: string): string {
   let hash = 0;
@@ -50,37 +43,24 @@ function trackTokenUsage(inputTokens: number, outputTokens: number): void {
 }
 
 export async function callClaude(prompt: string, useCache = true): Promise<string> {
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    throw new Error('No Claude API key found. Add NEXT_PUBLIC_CLAUDE_API_KEY to .env.local');
-  }
-
   if (useCache) {
     const cached = getCached(prompt);
     if (cached) return cached;
   }
 
-  const response = await fetch(CLAUDE_API_URL, {
+  const response = await fetch('/api/claude', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      max_tokens: 2048,
-      messages: [{ role: 'user', content: prompt }],
-    }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt }),
   });
 
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Claude API error ${response.status}: ${error}`);
+    const body = await response.json().catch(() => ({ error: response.statusText }));
+    throw new Error(body.error || `Claude API error ${response.status}`);
   }
 
   const data = await response.json();
-  const text = data.content?.[0]?.text || '';
+  const text: string = data.text || '';
 
   if (data.usage) {
     trackTokenUsage(data.usage.input_tokens || 0, data.usage.output_tokens || 0);

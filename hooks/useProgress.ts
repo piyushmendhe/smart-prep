@@ -70,6 +70,7 @@ export interface ProgressData {
     targetCompany: string;
     startDate: string;
     dailyGoal: number;
+    selectedTracks: string[];
   };
 }
 
@@ -101,6 +102,7 @@ const defaultData: ProgressData = {
     targetCompany: 'FAANG',
     startDate: new Date().toISOString().split('T')[0],
     dailyGoal: 5,
+    selectedTracks: ['dsa', 'system-design', 'de-roadmap', 'behavioral'],
   },
 };
 
