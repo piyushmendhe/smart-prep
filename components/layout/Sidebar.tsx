@@ -15,6 +15,7 @@ import {
   CalendarDays,
   MessagesSquare,
   User,
+  ShieldCheck,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -30,6 +31,8 @@ const navItems = [
   { href: '/sessions', icon: MessagesSquare, label: '💬 Sessions' },
   { href: '/profile', icon: User, label: '👤 Profile' },
 ];
+
+const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -89,6 +92,26 @@ export default function Sidebar() {
             </motion.div>
           );
         })}
+
+        {/* Admin link — only visible to admin */}
+        {user?.email === ADMIN_EMAIL && (
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            <Link
+              href="/admin"
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                pathname === '/admin'
+                  ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40 font-semibold'
+                  : 'text-muted hover:text-foreground hover:bg-neutral-800 border border-transparent'
+              }`}
+            >
+              <ShieldCheck className="w-5 h-5" />
+              <span className="text-sm font-medium">🛡️ Admin</span>
+            </Link>
+          </motion.div>
+        )}
       </nav>
 
       {/* User Info & Logout */}
