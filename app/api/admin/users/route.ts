@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
   }
 
   // Check admin email
-  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
   if (!adminEmail || user.email !== adminEmail) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
