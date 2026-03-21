@@ -94,7 +94,7 @@ export default function Sidebar() {
         })}
 
         {/* Admin link — only visible to admin */}
-        {user?.email === ADMIN_EMAIL && (
+        {ADMIN_EMAIL && user?.email?.toLowerCase().trim() === ADMIN_EMAIL.toLowerCase().trim() && (
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
