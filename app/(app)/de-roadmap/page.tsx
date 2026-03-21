@@ -1236,15 +1236,15 @@ interface FileFormat {
 }
 
 const AWS_SERVICE_COLORS: Record<string, string> = {
-  S3: 'bg-green-500 bg-opacity-20 text-green-400',
-  Glue: 'bg-blue-500 bg-opacity-20 text-blue-400',
-  Athena: 'bg-purple-500 bg-opacity-20 text-purple-400',
-  EMR: 'bg-orange-500 bg-opacity-20 text-orange-400',
-  Redshift: 'bg-red-500 bg-opacity-20 text-red-400',
-  Kinesis: 'bg-yellow-500 bg-opacity-20 text-yellow-400',
-  Lambda: 'bg-cyan-500 bg-opacity-20 text-cyan-400',
-  'Step Functions': 'bg-pink-500 bg-opacity-20 text-pink-400',
-  'Lake Formation': 'bg-teal-500 bg-opacity-20 text-teal-400',
+  S3: 'bg-green-500/20 text-green-400',
+  Glue: 'bg-blue-500/20 text-blue-400',
+  Athena: 'bg-purple-500/20 text-purple-400',
+  EMR: 'bg-orange-500/20 text-orange-400',
+  Redshift: 'bg-red-500/20 text-red-400',
+  Kinesis: 'bg-yellow-500/20 text-yellow-400',
+  Lambda: 'bg-cyan-500/20 text-cyan-400',
+  'Step Functions': 'bg-pink-500/20 text-pink-400',
+  'Lake Formation': 'bg-teal-500/20 text-teal-400',
 };
 
 const FILE_FORMATS: FileFormat[] = [
@@ -2621,8 +2621,8 @@ export default function DERoadmap() {
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm ${
                         percentComplete === 100
-                          ? 'bg-success bg-opacity-20 text-success'
-                          : 'bg-accent bg-opacity-20 text-accent'
+                          ? 'bg-success/20 text-success'
+                          : 'bg-accent/20 text-accent'
                       }`}
                     >
                       {phase.number}
@@ -2687,7 +2687,7 @@ export default function DERoadmap() {
                           transition={{ duration: 0.2 }}
                         >
                           <div
-                            className="bg-card bg-opacity-40 border border-neutral-700 rounded-lg p-4 transition-all group"
+                            className="bg-card/40 border border-neutral-700 rounded-lg p-4 transition-all group"
                           >
                             <div className="flex items-start gap-3 mb-3">
                               {/* Completion toggle — clicking the circle */}

@@ -166,7 +166,7 @@ export default function Profile() {
                   setFormData(data.settings);
                 }
               }}
-              className="px-4 py-2 bg-accent text-background rounded-lg font-medium hover:bg-opacity-90 transition-all flex items-center gap-2"
+              className="px-4 py-2 bg-accent text-background rounded-lg font-medium hover:opacity-90 transition-all flex items-center gap-2"
             >
               <Save className="w-4 h-4" />
               {isEditing ? 'Save' : 'Edit'}
@@ -472,7 +472,7 @@ export default function Profile() {
               <button
                 onClick={syncLeetCode}
                 disabled={syncing}
-                className="px-4 py-2 bg-accent text-[#0a0a0f] rounded-lg text-sm font-medium hover:bg-opacity-90 transition-all flex items-center gap-2 disabled:opacity-50"
+                className="px-4 py-2 bg-accent text-[#0a0a0f] rounded-lg text-sm font-medium hover:opacity-90 transition-all flex items-center gap-2 disabled:opacity-50"
               >
                 <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
                 {syncing ? 'Syncing…' : 'Sync'}

@@ -146,7 +146,7 @@ Make the flashcard questions SPECIFIC and TECHNICAL, testing real interview know
         <button
           onClick={generateReview}
           disabled={generating}
-          className="px-5 py-2.5 bg-accent text-[#0a0a0f] rounded-lg font-semibold flex items-center gap-2 hover:bg-opacity-90 transition-all disabled:opacity-50"
+          className="px-5 py-2.5 bg-accent text-[#0a0a0f] rounded-lg font-semibold flex items-center gap-2 hover:opacity-90 transition-all disabled:opacity-50"
         >
           <Brain className={`w-4 h-4 ${generating ? 'animate-pulse' : ''}`} />
           {generating ? 'Generating…' : 'Generate This Week\'s Review'}

@@ -116,7 +116,7 @@ export default function Behavioral() {
         </div>
         <button
           onClick={handleExport}
-          className="flex items-center gap-2 px-4 py-2 bg-accent text-background rounded-lg font-medium hover:bg-opacity-90 transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-accent text-background rounded-lg font-medium hover:opacity-90 transition-all"
         >
           <Download className="w-4 h-4" />
           Export All
@@ -215,7 +215,7 @@ export default function Behavioral() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={() => setModal({ storyId: null })}
-            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
@@ -303,7 +303,7 @@ export default function Behavioral() {
                                   });
                                 }}
                                 placeholder={`Tell your ${field.toLowerCase()} (${isResult ? '2-3 sentences with metrics' : '1-2 sentences'})`}
-                                className="w-full bg-neutral-800 bg-opacity-50 border border-neutral-700 rounded-lg p-3 text-sm text-foreground placeholder-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent resize-none h-24"
+                                className="w-full bg-neutral-800/50 border border-neutral-700 rounded-lg p-3 text-sm text-foreground placeholder-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent resize-none h-24"
                               />
                             </motion.div>
                           );
@@ -314,7 +314,7 @@ export default function Behavioral() {
                     {/* Close Button */}
                     <button
                       onClick={() => setModal({ storyId: null })}
-                      className="w-full mt-8 px-4 py-2 bg-accent text-background rounded-lg font-medium hover:bg-opacity-90 transition-all"
+                      className="w-full mt-8 px-4 py-2 bg-accent text-background rounded-lg font-medium hover:opacity-90 transition-all"
                     >
                       Done
                     </button>

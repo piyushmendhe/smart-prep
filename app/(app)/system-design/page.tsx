@@ -193,7 +193,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
         <div />
         <button
           onClick={() => startQuiz('System Design (Mixed)')}
-          className="flex items-center gap-2 px-4 py-2 bg-accent bg-opacity-20 hover:bg-opacity-30 text-accent border border-accent rounded-lg text-sm font-medium transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-accent/20 hover:opacity-30 text-accent border border-accent rounded-lg text-sm font-medium transition-all"
         >
           <Brain className="w-4 h-4" />
           Quiz Me
@@ -222,8 +222,8 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
           const systemData = getSystem(system.id);
           const statusColors = {
             'Not Started': 'bg-neutral-800 text-muted',
-            'In Progress': 'bg-yellow-500 bg-opacity-20 text-yellow-400',
-            'Done': 'bg-success bg-opacity-20 text-success',
+            'In Progress': 'bg-yellow-500/20 text-yellow-400',
+            'Done': 'bg-success/20 text-success',
           };
 
           return (
@@ -280,7 +280,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={() => setModal({ systemId: null })}
-            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
@@ -324,7 +324,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
                           const isChecked = systemData.reshaded[key];
 
                           return (
-                            <label key={item} className="flex items-center gap-3 p-3 rounded-lg hover:bg-neutral-800 hover:bg-opacity-30 cursor-pointer transition-all">
+                            <label key={item} className="flex items-center gap-3 p-3 rounded-lg hover:bg-neutral-800 hover:opacity-30 cursor-pointer transition-all">
                               <input type="checkbox" checked={isChecked} onChange={() => updateSystemReshaded(modal.systemId!, key, !isChecked)} className="hidden" />
                               <motion.div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${isChecked ? 'bg-accent border-accent' : 'border-neutral-700 hover:border-accent'}`}>
                                 {isChecked && <Check className="w-3 h-3 text-background" />}
@@ -336,7 +336,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
                       </div>
                     </div>
 
-                    <button onClick={() => setModal({ systemId: null })} className="w-full mt-2 px-4 py-2 bg-accent text-background rounded-lg font-medium hover:bg-opacity-90 transition-all">
+                    <button onClick={() => setModal({ systemId: null })} className="w-full mt-2 px-4 py-2 bg-accent text-background rounded-lg font-medium hover:opacity-90 transition-all">
                       Done
                     </button>
                   </div>
@@ -350,7 +350,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
       {/* Quiz Panel (Feature 4) */}
       <AnimatePresence>
         {quizOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
             <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-card border border-neutral-700 rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
                 <div>
@@ -377,7 +377,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
               {quizQuestions.length > 0 && !quizDone && !quizLoading && quizQuestions[quizIndex] && (
                 <div>
                   <div className="mb-2">
-                    <span className={`text-xs px-2 py-0.5 rounded ${quizQuestions[quizIndex].type === 'mcq' ? 'bg-accent bg-opacity-20 text-accent' : quizQuestions[quizIndex].type === 'short' ? 'bg-yellow-400 bg-opacity-20 text-yellow-400' : 'bg-purple-400 bg-opacity-20 text-purple-400'}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded ${quizQuestions[quizIndex].type === 'mcq' ? 'bg-accent/20 text-accent' : quizQuestions[quizIndex].type === 'short' ? 'bg-yellow-400/20 text-yellow-400' : 'bg-purple-400/20 text-purple-400'}`}>
                       {quizQuestions[quizIndex].type === 'mcq' ? 'Multiple Choice' : quizQuestions[quizIndex].type === 'short' ? 'Short Answer' : 'Architecture'}
                     </span>
                   </div>
@@ -391,7 +391,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
                         const hasAnswered = !!quizAnswers[quizIndex];
                         return (
                           <button key={i} onClick={() => !hasAnswered && setQuizAnswers(prev => ({ ...prev, [quizIndex]: opt }))}
-                            className={`w-full text-left px-4 py-3 rounded-lg border text-sm transition-all ${hasAnswered ? isCorrect ? 'border-success bg-success bg-opacity-10 text-success' : selected ? 'border-secondary bg-secondary bg-opacity-10 text-secondary' : 'border-neutral-700 text-muted' : selected ? 'border-accent bg-accent bg-opacity-10 text-accent' : 'border-neutral-700 text-foreground hover:border-accent'}`}
+                            className={`w-full text-left px-4 py-3 rounded-lg border text-sm transition-all ${hasAnswered ? isCorrect ? 'border-success bg-success/10 text-success' : selected ? 'border-secondary bg-secondary/10 text-secondary' : 'border-neutral-700 text-muted' : selected ? 'border-accent bg-accent/10 text-accent' : 'border-neutral-700 text-foreground hover:border-accent'}`}
                           >{opt}</button>
                         );
                       })}
@@ -407,7 +407,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
                     <div>
                       <textarea value={quizAnswers[quizIndex] || ''} onChange={e => setQuizAnswers(prev => ({ ...prev, [quizIndex]: e.target.value }))} placeholder="Type your answer..." rows={4} className="w-full bg-neutral-800 border border-neutral-700 rounded-lg p-3 text-sm text-foreground focus:outline-none focus:border-accent resize-none" />
                       {!quizFeedback[quizIndex] ? (
-                        <button onClick={() => checkShortAnswer(quizIndex)} disabled={checkingAnswer || !quizAnswers[quizIndex]?.trim()} className="mt-2 px-4 py-2 bg-accent bg-opacity-20 text-accent rounded-lg text-sm disabled:opacity-50 flex items-center gap-2">
+                        <button onClick={() => checkShortAnswer(quizIndex)} disabled={checkingAnswer || !quizAnswers[quizIndex]?.trim()} className="mt-2 px-4 py-2 bg-accent/20 text-accent rounded-lg text-sm disabled:opacity-50 flex items-center gap-2">
                           {checkingAnswer ? <><RefreshCw className="w-3 h-3 animate-spin" /> Checking...</> : 'Check Answer'}
                         </button>
                       ) : (
@@ -424,7 +424,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
                     {quizIndex < quizQuestions.length - 1 ? (
                       <button onClick={() => setQuizIndex(i => i + 1)} className="px-4 py-2 bg-accent text-background rounded-lg text-sm font-medium flex items-center gap-1">Next <ChevronRight className="w-4 h-4" /></button>
                     ) : (
-                      <button onClick={() => setQuizDone(true)} className="px-4 py-2 bg-success bg-opacity-20 text-success border border-success rounded-lg text-sm">Finish Quiz</button>
+                      <button onClick={() => setQuizDone(true)} className="px-4 py-2 bg-success/20 text-success border border-success rounded-lg text-sm">Finish Quiz</button>
                     )}
                   </div>
                 </div>
@@ -435,7 +435,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
                   <p className="text-3xl font-bold text-accent mb-2">{getQuizScore()}/50</p>
                   <p className="text-muted mb-6">{getQuizScore() >= 40 ? 'Excellent!' : getQuizScore() >= 25 ? 'Good — review weak areas' : 'Keep practicing'}</p>
                   <div className="flex gap-3 justify-center">
-                    <button onClick={() => startQuiz(quizSystem)} className="px-4 py-2 bg-accent bg-opacity-20 text-accent border border-accent rounded-lg text-sm">Retake</button>
+                    <button onClick={() => startQuiz(quizSystem)} className="px-4 py-2 bg-accent/20 text-accent border border-accent rounded-lg text-sm">Retake</button>
                     <button onClick={() => setQuizOpen(false)} className="px-4 py-2 bg-neutral-800 text-foreground rounded-lg text-sm">Done</button>
                   </div>
                 </div>
@@ -449,7 +449,7 @@ Evaluate and respond with JSON: {"score": 0-10, "feedback": "brief feedback"}`;
       <AnimatePresence>
         {hintPanel && (
           <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setHintPanel(null)} className="fixed inset-0 bg-black bg-opacity-50 z-40" />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setHintPanel(null)} className="fixed inset-0 bg-black/50 z-40" />
             <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }} className="fixed right-0 top-0 h-full w-96 bg-card border-l border-neutral-700 z-50 overflow-y-auto">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">

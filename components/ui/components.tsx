@@ -113,7 +113,7 @@ export function GlassCard({
     <motion.div
       whileHover={hoverable ? { scale: 1.02 } : {}}
       onClick={onClick}
-      className={`bg-card bg-opacity-40 backdrop-blur-md border border-neutral-700 border-opacity-50 rounded-xl p-6 transition-all ${
+      className={`bg-card/40 backdrop-blur-md border border-neutral-700 border-neutral-700/50 rounded-xl p-6 transition-all ${
         hoverable ? 'cursor-pointer hover:border-accent border-opacity-30 hover:border-opacity-100' : ''
       } ${className}`}
     >
@@ -128,9 +128,9 @@ interface DifficultyBadgeProps {
 
 export function DifficultyBadge({ difficulty }: DifficultyBadgeProps) {
   const colorMap = {
-    Easy: 'bg-success bg-opacity-20 text-success',
-    Medium: 'bg-yellow-500 bg-opacity-20 text-yellow-400',
-    Hard: 'bg-secondary bg-opacity-20 text-secondary',
+    Easy: 'bg-success/20 text-success',
+    Medium: 'bg-yellow-500/20 text-yellow-400',
+    Hard: 'bg-secondary/20 text-secondary',
   };
 
   return (

@@ -304,7 +304,7 @@ Generate a prioritized 1-week catch-up schedule to get back on track. Be specifi
         <div className="flex items-center gap-3 mb-4">
           <Target className="w-6 h-6 text-secondary" />
           <h2 className="font-heading font-bold text-2xl text-foreground">War Room</h2>
-          <span className="text-xs bg-secondary bg-opacity-20 text-secondary px-2 py-1 rounded font-medium">90-Day Tracker</span>
+          <span className="text-xs bg-secondary/20 text-secondary px-2 py-1 rounded font-medium">90-Day Tracker</span>
         </div>
 
         <div className="grid grid-cols-3 gap-6">
@@ -388,7 +388,7 @@ Generate a prioritized 1-week catch-up schedule to get back on track. Be specifi
             <button
               onClick={handleCatchUpPlan}
               disabled={loadingCatchUp}
-              className="mt-4 w-full py-2 bg-secondary bg-opacity-20 hover:bg-opacity-30 text-secondary rounded-lg text-sm font-medium transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              className="mt-4 w-full py-2 bg-secondary/20 hover:bg-secondary/30 text-secondary rounded-lg text-sm font-medium transition-all disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {loadingCatchUp ? <><RefreshCw className="w-4 h-4 animate-spin" /> Generating...</> : '⚡ Catch Up Plan (AI)'}
             </button>
@@ -433,7 +433,7 @@ Generate a prioritized 1-week catch-up schedule to get back on track. Be specifi
               value={todayLog}
               onChange={handleLogChange}
               placeholder="What did you accomplish today? (e.g., Solved 3 problems, Designed Twitter feed, Wrote Ownership story)"
-              className="w-full h-32 bg-neutral-800 bg-opacity-50 border border-neutral-700 rounded-lg p-3 text-sm text-foreground placeholder-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent resize-none"
+              className="w-full h-32 bg-neutral-800/50 border border-neutral-700 rounded-lg p-3 text-sm text-foreground placeholder-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent resize-none"
             />
             <p className="text-xs text-muted mt-2">Track daily progress → Build momentum</p>
           </GlassCard>
