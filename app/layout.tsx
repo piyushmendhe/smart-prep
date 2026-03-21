@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import { ThemeProvider } from "@/lib/theme";
+import Script from "next/script";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -25,8 +26,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+
   return (
     <html lang="en">
+      <head>
+        {adsenseId && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
+      </head>
       <body className={`${spaceGrotesk.variable} ${inter.variable} antialiased bg-background text-foreground`}>
         <ThemeProvider>
         {children}

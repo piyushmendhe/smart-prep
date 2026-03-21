@@ -16,6 +16,7 @@ import {
   MessagesSquare,
   User,
   ShieldCheck,
+  Crown,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -30,6 +31,7 @@ const navItems = [
   { href: '/weekly-review', icon: CalendarDays, label: '📅 Weekly Review' },
   { href: '/sessions', icon: MessagesSquare, label: '💬 Sessions' },
   { href: '/profile', icon: User, label: '👤 Profile' },
+  { href: '/pricing', icon: Crown, label: '💎 Pricing' },
 ];
 
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
