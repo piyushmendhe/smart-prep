@@ -2,15 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
 import { createClient } from '@supabase/supabase-js';
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
-
 const PLANS = {
-  monthly:  { amount: 19900,  currency: 'INR' }, // ₹199
-  yearly:   { amount: 99900,  currency: 'INR' }, // ₹999
-  lifetime: { amount: 199900, currency: 'INR' }, // ₹1999
+  monthly:  { amount: 19900,  currency: 'INR' },
+  yearly:   { amount: 99900,  currency: 'INR' },
+  lifetime: { amount: 199900, currency: 'INR' },
 } as const;
 
 export async function POST(req: NextRequest) {
@@ -36,6 +31,14 @@ export async function POST(req: NextRequest) {
   if (!plan) {
     return NextResponse.json({ error: 'Invalid plan' }, { status: 400 });
   }
+
+  const keyId = process.env.RAZORPAY_KEY_ID;
+  const keySecret = process.env.RAZORPAY_KEY_SECRET;
+  if (!keyId || !keySecret) {
+    return NextResponse.json({ error: 'Payment not configured' }, { status: 503 });
+  }
+
+  const razorpay = new Razorpay({ key_id: keyId, key_secret: keySecret });
 
   const order = await razorpay.orders.create({
     amount: plan.amount,
