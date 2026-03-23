@@ -28,14 +28,7 @@ export default function Header() {
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="sticky top-0 z-10 px-8 py-4 flex items-center justify-between"
-      style={{
-        background: 'rgba(8, 8, 15, 0.85)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)',
-        boxShadow: '0 1px 0 rgba(0,212,255,0.06)',
-      }}
+      className="app-header sticky top-0 z-10 px-8 py-4 flex items-center justify-between"
     >
       {/* Bottom gradient line */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent pointer-events-none" />

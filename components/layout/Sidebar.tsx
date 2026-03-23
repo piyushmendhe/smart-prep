@@ -56,12 +56,7 @@ export default function Sidebar() {
       initial={{ x: -264 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="w-64 flex flex-col fixed h-screen overflow-y-auto z-20 left-0 top-0"
-      style={{
-        background: 'linear-gradient(180deg, #08080f 0%, #0a0a16 50%, #070710 100%)',
-        borderRight: '1px solid rgba(255,255,255,0.05)',
-        boxShadow: '4px 0 24px rgba(0,0,0,0.4)',
-      }}
+      className="sidebar w-64 flex flex-col fixed h-screen overflow-y-auto z-20 left-0 top-0"
     >
       {/* Top gradient accent line */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
@@ -165,7 +160,7 @@ export default function Sidebar() {
             className="space-y-2"
           >
             {/* User card */}
-            <div className="flex items-center gap-3 px-3 py-3 rounded-xl bg-white/3 border border-white/5">
+            <div className="flex items-center gap-3 px-3 py-3 rounded-xl bg-black/10 border border-white/5 dark:bg-white/3">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent/30 to-purple-500/30 border border-accent/20 flex items-center justify-center flex-shrink-0">
                 <span className="text-xs font-bold text-accent">{initials}</span>
               </div>

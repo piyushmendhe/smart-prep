@@ -43,56 +43,23 @@
 
 body {
   @apply bg-background text-foreground font-body;
-  /* Soft color blobs + grid — no duplicate DOM blobs */
+  /* Dot-grid + ambient color blobs */
   background-image:
-    radial-gradient(ellipse 75% 55% at 0% 0%,   rgba(0, 212, 255, 0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 65% 55% at 100% 100%, rgba(139, 92, 246, 0.09) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 35% at 100% 0%,  rgba(0, 255, 136, 0.05) 0%, transparent 60%),
-    linear-gradient(rgba(255, 255, 255, 0.032) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
-  background-size: auto, auto, auto, 52px 52px, 52px 52px;
+    radial-gradient(ellipse 70% 50% at 15% 0%,  rgba(0, 212, 255, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 85% 95%, rgba(139, 92, 246, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 30% at 92% 5%,  rgba(0, 255, 136, 0.04) 0%, transparent 50%),
+    radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: auto, auto, auto, 28px 28px;
   background-attachment: fixed;
 }
 
-/* Top aurora beam */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 5%,
-    rgba(0, 212, 255, 0.85) 30%,
-    rgba(139, 92, 246, 0.85) 60%,
-    rgba(0, 255, 136, 0.50) 80%,
-    transparent 95%
-  );
-  z-index: 100;
-  pointer-events: none;
-}
-
-/* Light mode overrides */
 [data-theme="light"] body {
   background-image:
-    radial-gradient(ellipse 75% 55% at 0% 0%,    rgba(0, 153, 204, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 65% 55% at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 60%),
-    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-  background-size: auto, auto, 52px 52px, 52px 52px;
+    radial-gradient(ellipse 70% 50% at 15% 0%,  rgba(0, 153, 204, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 85% 95%, rgba(139, 92, 246, 0.05) 0%, transparent 55%),
+    radial-gradient(rgba(0, 0, 0, 0.055) 1px, transparent 1px);
+  background-size: auto, auto, 28px 28px;
   background-attachment: fixed;
-}
-
-[data-theme="light"] body::before {
-  background: linear-gradient(
-    90deg,
-    transparent 5%,
-    rgba(0, 153, 204, 0.6) 30%,
-    rgba(139, 92, 246, 0.5) 60%,
-    transparent 95%
-  );
 }
 
 html {
@@ -122,11 +89,52 @@ html {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+[data-theme="light"] .gradient-text {
+  background: linear-gradient(135deg, #0077aa, #6d28d9, #007a3d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 /* Neon glow utilities */
 .glow-cyan { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.1); }
 .glow-purple { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.1); }
 .glow-green { box-shadow: 0 0 20px rgba(0, 255, 136, 0.3), 0 0 40px rgba(0, 255, 136, 0.1); }
+
+/* Theme-aware sidebar */
+.sidebar {
+  background: linear-gradient(180deg, #08080f 0%, #0a0a16 50%, #070710 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+}
+[data-theme="light"] .sidebar {
+  background: linear-gradient(180deg, #f8f9ff 0%, #f0f2fa 50%, #eef0f8 100%);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Theme-aware header */
+.app-header {
+  background: rgba(8, 8, 15, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+[data-theme="light"] .app-header {
+  background: rgba(248, 249, 255, 0.90);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+/* Theme-aware glass card */
+.glass-card {
+  background: linear-gradient(135deg, rgba(20,20,35,0.9), rgba(12,12,24,0.7));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+[data-theme="light"] .glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,249,255,0.85));
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
 
 /* Animated gradient border */
 .card-glow {

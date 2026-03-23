@@ -122,13 +122,10 @@ export function GlassCard({
       whileHover={hoverable ? { scale: 1.015, y: -2 } : {}}
       onClick={onClick}
       className={`
-        relative bg-gradient-to-br from-neutral-900/90 to-neutral-950/70
-        backdrop-blur-xl rounded-xl p-6
-        border border-neutral-700/40
-        shadow-lg
-        transition-all duration-300
+        glass-card relative backdrop-blur-xl rounded-xl p-6
+        shadow-lg transition-all duration-300
         ${hoverable
-          ? 'cursor-pointer hover:border-accent/25 hover:shadow-[0_8px_32px_rgba(0,212,255,0.07)] hover:from-neutral-900 hover:to-neutral-900/90'
+          ? 'cursor-pointer hover:border-accent/25 hover:shadow-[0_8px_32px_rgba(0,212,255,0.07)]'
           : ''
         }
         ${className}
