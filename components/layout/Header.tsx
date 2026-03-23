@@ -25,72 +25,83 @@ export default function Header() {
 
   return (
     <motion.header
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="bg-card border-b border-neutral-800 px-8 py-4 flex items-center justify-between sticky top-0 z-10"
+      transition={{ duration: 0.4 }}
+      className="sticky top-0 z-10 px-8 py-4 flex items-center justify-between"
+      style={{
+        background: 'rgba(8, 8, 15, 0.85)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(255,255,255,0.05)',
+        boxShadow: '0 1px 0 rgba(0,212,255,0.06)',
+      }}
     >
+      {/* Bottom gradient line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent pointer-events-none" />
+
       <div>
-        <h2 className="text-foreground font-heading font-semibold text-xl">
+        <h2 className="font-heading font-semibold text-lg text-foreground/90">
           {currentDate}
         </h2>
-        <p className="text-muted text-sm">
-          Build with purpose
-        </p>
+        <p className="text-xs text-muted tracking-wide">Build with purpose, ship consistently</p>
       </div>
 
       <div className="flex items-center gap-3">
-      {/* Theme Toggle */}
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={toggle}
-        className="w-9 h-9 rounded-lg border border-neutral-700 flex items-center justify-center text-muted hover:text-foreground hover:border-accent transition-colors"
-        title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-      >
-        {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-      </motion.button>
-
-      {/* Streak Counter */}
-      <motion.div
-        whileHover={{ scale: 1.03 }}
-        className="relative flex items-center gap-3 bg-gradient-to-r from-orange-500/20 to-amber-500/10 border border-orange-500/30 px-4 py-2.5 rounded-xl cursor-default overflow-hidden"
-        title={`Best streak: ${data.streak.longest} days`}
-      >
-        {/* background glow */}
-        <div className="absolute inset-0 bg-orange-500/5 blur-md pointer-events-none" />
-
-        <motion.div
-          animate={{ scale: [1, 1.18, 1], rotate: [-6, 6, -3, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 3 }}
-          className="relative z-10 flex-shrink-0"
+        {/* Theme Toggle */}
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.93 }}
+          onClick={toggle}
+          className="w-9 h-9 rounded-lg border border-neutral-700/60 flex items-center justify-center text-muted hover:text-accent hover:border-accent/40 hover:bg-accent/5 transition-all duration-200"
+          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
         >
-          <Flame className="w-6 h-6 text-orange-400" fill="currentColor" />
-        </motion.div>
+          {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+        </motion.button>
 
-        <div className="relative z-10 leading-none">
-          <motion.span
-            key={data.streak.current}
-            initial={{ opacity: 0, scale: 0.6, y: -6 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 18 }}
-            className="text-2xl font-bold text-orange-300 block"
+        {/* Streak Counter */}
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          className="relative flex items-center gap-3 px-4 py-2.5 rounded-xl cursor-default overflow-hidden"
+          style={{
+            background: 'linear-gradient(135deg, rgba(249,115,22,0.15), rgba(245,158,11,0.08))',
+            border: '1px solid rgba(249,115,22,0.25)',
+            boxShadow: '0 0 20px rgba(249,115,22,0.08)',
+          }}
+          title={`Best streak: ${data.streak.longest} days`}
+        >
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], rotate: [-5, 5, -3, 0] }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 4 }}
+            className="flex-shrink-0"
           >
-            {data.streak.current}
-          </motion.span>
-          <span className="text-[10px] text-orange-400/70 font-semibold tracking-widest uppercase">
-            day streak
-          </span>
-        </div>
+            <Flame className="w-5 h-5 text-orange-400" fill="currentColor" />
+          </motion.div>
 
-        {data.streak.longest > 0 && (
-          <div className="relative z-10 pl-3 border-l border-orange-500/25">
-            <p className="text-[9px] text-orange-400/50 font-medium uppercase tracking-wide leading-tight">Best</p>
-            <p className="text-base font-bold text-orange-300/60 leading-tight">{data.streak.longest}</p>
+          <div className="leading-none">
+            <motion.span
+              key={data.streak.current}
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 18 }}
+              className="text-xl font-bold text-orange-300 block"
+            >
+              {data.streak.current}
+            </motion.span>
+            <span className="text-[9px] text-orange-400/60 font-semibold tracking-widest uppercase">
+              day streak
+            </span>
           </div>
-        )}
-      </motion.div>
+
+          {data.streak.longest > 0 && (
+            <div className="pl-3 border-l border-orange-500/20">
+              <p className="text-[9px] text-orange-400/40 font-medium uppercase tracking-wide">Best</p>
+              <p className="text-sm font-bold text-orange-300/50">{data.streak.longest}</p>
+            </div>
+          )}
+        </motion.div>
       </div>
     </motion.header>
   );
 }
+

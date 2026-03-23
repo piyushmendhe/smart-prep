@@ -102,20 +102,23 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      {/* Animated background gradient */}
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-accent opacity-10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary opacity-10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-cyan-500 opacity-[0.06] rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500 opacity-[0.06] rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent opacity-[0.02] rounded-full blur-3xl" />
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="w-full max-w-md relative z-10"
       >
-        <div className="bg-card border border-neutral-800 rounded-2xl p-8 backdrop-blur-xl">
+        {/* Card with gradient border effect */}
+        <div className="relative rounded-2xl p-px bg-gradient-to-br from-accent/20 via-neutral-800/50 to-purple-500/10">
+          <div className="rounded-2xl p-8" style={{ background: 'rgba(10,10,20,0.95)', backdropFilter: 'blur(24px)' }}>
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -123,12 +126,15 @@ export default function LoginPage() {
             transition={{ delay: 0.1 }}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="w-12 h-12 bg-gradient-to-br from-accent to-secondary rounded-lg flex items-center justify-center">
-              <Flame className="w-7 h-7 text-white" />
+            <div className="relative">
+              <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                <Flame className="w-7 h-7 text-white" />
+              </div>
+              <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-cyan-500/30 to-purple-600/30 blur-md -z-10" />
             </div>
             <div>
-              <h1 className="text-2xl font-heading font-bold text-foreground">SMART PREP</h1>
-              <p className="text-xs text-muted">FAANG Interview Prep</p>
+              <h1 className="text-2xl font-heading font-bold gradient-text">SMART PREP</h1>
+              <p className="text-xs text-muted tracking-widest uppercase">Interview OS</p>
             </div>
           </motion.div>
 
@@ -285,16 +291,17 @@ export default function LoginPage() {
             whileTap={{ scale: 0.98 }}
             onClick={handleGoogle}
             disabled={isLoading}
-            className="w-full flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-neutral-600 disabled:opacity-50 text-foreground font-medium py-2.5 rounded-lg transition-all duration-200"
+            className="w-full flex items-center justify-center gap-3 bg-white/4 hover:bg-white/6 border border-white/10 hover:border-white/20 disabled:opacity-50 text-foreground font-medium py-2.5 rounded-lg transition-all duration-200"
           >
             <GoogleIcon />
             Continue with Google
           </motion.button>
+          </div>
         </div>
 
         {/* Footer */}
         <p className="text-center text-xs text-muted mt-6">
-          Secure login • Your data is private
+          Secure login · Your data is private
         </p>
       </motion.div>
     </div>
